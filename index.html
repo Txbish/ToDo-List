@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="index.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="section-title">// TO-DO</div>
+      <div class="todo-container">
+        <div class="sidebar">
+          <div class="projects">
+            <div>Projects</div>
+            <ul class="project-list"></ul>
+          </div>
+          <div class="add-task">
+            <button class="add-task-btn" onclick="openAddTaskModal()">
+              <i class="fas fa-plus"></i>
+              Add Task
+            </button>
+          </div>
+        </div>
+        <div class="todo-content">
+          <div class="todo-list">
+            <div class="empty-state">
+              <i class="fas fa-clipboard-list"></i>
+              <h3>No tasks yet</h3>
+              <p>
+                Start by adding your first task to get organized and stay
+                productive!
+              </p>
+            </div>
+            <ul class="list-todo" hidden></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Task Modal -->
+      <div id="addTaskModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeAddTaskModal()">&times;</span>
+          <h2>Add New Task</h2>
+          <form id="addTaskForm" class="task-form">
+            <div class="form-group">
+              <label for="taskTitle">Title:</label>
+              <input type="text" id="taskTitle" name="title" required />
+            </div>
+            <div class="form-group">
+              <label for="taskDescription">Description:</label>
+              <textarea
+                id="taskDescription"
+                name="description"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label for="taskDueDate">Due Date:</label>
+              <input type="date" id="taskDueDate" name="dueDate" />
+            </div>
+            <div class="form-group">
+              <label for="taskPriority">Priority:</label>
+              <select id="taskPriority" name="priority">
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="taskProject">Project:</label>
+              <select id="taskProject" name="project">
+                <option value="default">Default</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="taskNotes">Notes:</label>
+              <input id="taskNotes" name="notes" type="text" />
+            </div>
+            <div class="form-buttons">
+              <button
+                type="button"
+                class="cancel-btn"
+                onclick="closeAddTaskModal()"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="submit-btn">Add Task</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Edit Task Modal -->
+      <!-- Edit Task Modal -->
+      <div id="editTaskModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeEditTaskModal()">&times;</span>
+          <h2>Edit Task</h2>
+          <form id="editTaskForm" class="task-form">
+            <div class="form-group">
+              <label>Title:</label>
+              <p id="editTaskTitleText" class="readonly-field"></p>
+            </div>
+
+            <!-- Description (read-only) -->
+            <div class="form-group">
+              <label>Description:</label>
+              <p id="editTaskDescriptionText" class="readonly-field"></p>
+            </div>
+
+            <!-- Due Date (editable) -->
+            <div class="form-group">
+              <label for="editTaskDueDate">Due Date:</label>
+              <input type="date" id="editTaskDueDate" name="dueDate" />
+            </div>
+
+            <!-- Priority (editable) -->
+            <div class="form-group">
+              <label for="editTaskPriority">Priority:</label>
+              <select id="editTaskPriority" name="priority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+
+            <!-- Project (read-only) -->
+            <div class="form-group">
+              <label>Project:</label>
+              <p id="editTaskProjectText" class="readonly-field"></p>
+            </div>
+
+            <!-- Notes (read-only) -->
+            <div class="form-group">
+              <label>Notes:</label>
+              <p id="editTaskNotesText" class="readonly-field"></p>
+            </div>
+
+            <div class="form-buttons">
+              <button
+                type="button"
+                class="cancel-btn"
+                onclick="closeEditTaskModal()"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="submit-btn">Update Task</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Task Details Modal -->
+      <div id="todoModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Task Details</h2>
+          <div class="modal-body">
+            <p><strong>Title:</strong> <span id="modalTitle"></span></p>
+            <p>
+              <strong>Description:</strong> <span id="modalDescription"></span>
+            </p>
+            <p><strong>Due Date:</strong> <span id="modalDueDate"></span></p>
+            <p><strong>Priority:</strong> <span id="modalPriority"></span></p>
+            <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+            <p><strong>Notes:</strong> <span id="modalNotes"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-class ToDo {
+export class ToDo {
   constructor(title, description, dueDate, priority, notes = "") {
     this.title = title;
     this.description = description;
@@ -23,9 +23,14 @@ class ToDo {
   }
 }
 
-class ToDoList {
+export class ToDoList {
   constructor() {
-    this.projects = [{ name: "default", list: [] }];
+    this.projects = [
+      { name: "Default", list: [] },
+      { name: "Work", list: [] },
+      { name: "Personal", list: [] },
+      { name: "Shopping", list: [] },
+    ];
   }
 
   getProject(name) {
@@ -53,5 +58,9 @@ class ToDoList {
   listTodos(projectName) {
     const project = this.getProject(projectName);
     return project ? project.list : [];
+  }
+
+  listProjects() {
+    return this.projects.map((project) => project.name);
   }
 }
